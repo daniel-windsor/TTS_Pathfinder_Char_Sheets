@@ -1,0 +1,188 @@
+mT = {}
+
+charType = 'Male Human Cavalier'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd10'
+mT.Strength.range = 4
+mT.Strength.Melee = 2
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd4'
+mT.Dexterity.range = 1
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd8'
+mT.Constitution.range = 2
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd6'
+mT.Intelligence.range = 1
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = nil
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd6'
+mT.Wisdom.range = 3
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = 1
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd8'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = 3
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Alain'
+mT.r0_powers.handSize = {4, 7}
+mT.r0_powers.proficiencies = {'Light Armors, Heavy Armors, Weapons'}
+mT.r0_powers.A = {'You may discard a card to add 1 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on this check',
+                  'You may discard a card to add 2 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on this check'}
+mT.r0_powers.B = {'At the end of your turn you may recharge any number of weapons',
+                  'At the end of your turn you may recharge any number of weapons (or allies or items)'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Alain (Glory Hound)'
+mT.r1_powers.handSize = {4, 7}
+mT.r1_powers.proficiencies = {'Light Armors, Heavy Armors, Weapons'}
+mT.r1_powers.A = {'You may discard a card to add 1 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on this check',
+                  'You may discard a card to add 2 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on this check',
+                  'You may discard a card to add 3 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on this check',
+                  'You may discard a card to add 3 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top (or under the top) of its location deck.  Other characters may not play cards or use powers on this check'}
+mT.r1_powers.B = {'At the end of your turn you may recharge any number of weapons',
+                  'At the end of your turn you may recharge any number of weapons (or allies or items)'}
+mT.r1_powers.C = {'',
+                  'When you play an ally to explore your location, you may add your Diplomacy skill and the Mental trait to your Melee checks during that exploration',
+                  'When you play an ally to explore your location, you may add your Diplomacy skill and the Mental trait to your Melee checks (or checks to aquire items) during that exploration'}
+mT.r1_powers.D = {'',
+                  'When another character at your location would encounter a monster, discard a card; you encounter it instead',
+                  'When another character at your location would encounter a monster (or a weapon), discard a card; you encounter it instead',
+                  'When another character at your location would encounter a monster (or a weapon), discard (or recharge) a card; you encounter it instead',}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Alain (Lancer)'
+mT.r2_powers.handSize = {4, 6}
+mT.r2_powers.proficiencies = {'Light Armors, Heavy Armors, Weapons'}
+mT.r2_powers.A = {'You may discard a card to add 1 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on the check.',
+                  'You may discard a card to add 2 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on the check.',
+                  'You may discard a card to add 2 plus its adventure deck number to your check to defeat a non-villain monster.  If undefeated, return it to the top of its location deck.  Other characters may not play cards or use powers on the check.  (If defeated, recharge a random card from your discard pile)'}
+mT.r2_powers.B = {'At the end of your turn you may recharge any number of weapons',
+                  'At the end of your turn you may recharge any number of weapons (or allies or items)'}
+mT.r2_powers.C = {'',
+                  'Recharge a weapon or armor to search your deck or discard pile for a card that has the Mount trait and put it in your hand',
+                  'Recharge a weapon or armor (or put it on top of your deck) to search your deck or discard pile for a card that has the Mount trait and put it in your hand'}
+mT.r2_powers.D = {'',
+                  'When you would discard a card that has the Polearm or Spear trait for its power, recharge it instead',
+                  'When you would discard a card that has the Polearm or Spear trait for its power, recharge it instead (or shuffle it into your deck)',
+                  'When you would discard a card that has the Polearm or Spear trait for its power, recharge it instead (or shuffle it into your deck) (or put it on top of your deck)'}
+mT.r2_powers.E = {'',
+                  'On your turn, discard a card that has the Mount trait to move to another location and examine the top card of that location deck.  If it is a monster, you may encounter it',
+                  'On your turn, discard a card that has the Mount trait (or put it on the top of your deck) to move to another location and examine the top card of that location deck.  If it is a monster, you may encounter it'}
+
+--Character Base Cards
+favouredType = 'Weapon'
+cohort = 'Donahan'
+
+mT.cards = {}
+mT.cards.weapon = {4, 7}
+mT.cards.spell = {0, 0}
+mT.cards.armor = {3, 5}
+mT.cards.item = {2, 3}
+mT.cards.ally = {3, 5}
+mT.cards.blessing = {3, 5}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+savedStats.G = 1
+savedStats.H = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

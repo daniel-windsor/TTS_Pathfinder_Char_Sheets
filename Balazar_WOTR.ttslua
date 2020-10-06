@@ -1,0 +1,190 @@
+mT = {}
+
+charType = 'Male Gnome Summoner'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd6'
+mT.Strength.range = 1
+mT.Strength.Melee = nil
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd6'
+mT.Dexterity.range = 2
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 3
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd8'
+mT.Intelligence.range = 3
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = 2
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd6'
+mT.Wisdom.range = 2
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd10'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = 2
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Balazar'
+mT.r0_powers.handSize = {6, 8}
+mT.r0_powers.proficiencies = {'Light Armors'}
+mT.r0_powers.A = {'After you play a spell that has the Attack trait, banish it'}
+mT.r0_powers.B = {'You may discard a spell to draw a random monster from the box'}
+mT.r0_powers.C = {'When you defeat a monster and would banish it, you may add it to your hand instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier)',
+                  'When you defeat a monster and would banish it, you may add it to your hand instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item)'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Balazar (Eidolomancer)'
+mT.r1_powers.handSize = {6, 9}
+mT.r1_powers.proficiencies = {'Light Armors'}
+mT.r1_powers.A = {'After you play a spell that has the Attack trait, banish it'}
+mT.r1_powers.B = {'You may discard a spell to draw a random monster from the box'}
+mT.r1_powers.C = {'When you defeat a monster and would banish it, you may add it to your hand instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may draw a card) instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may draw a card) instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may draw a card) instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may draw a card) instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item) (or move after an encounter)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may draw a card) instead. You may banish a monster from your hand to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item) (or move after an encounter) (or reroll your failed combat check)'}
+mT.r1_powers.D = {'',
+                  'While you are display a cohort that has the Eidolon trait, you may use your strength skill instead of your Constitution or Fortitude skill on your checks',
+                  'While you are display a cohort that has the Eidolon trait, you may use your strength skill instead of your Constitution or Fortitude (or Dexterity or Stealth) skill on your checks'}
+mT.r1_powers.E = {'',
+                  'When a character plays a blessing on your Strength check, you may add 1d12 instead of the normal die',
+                  'When a character plays a blessing on your Strength check, you may add 1d12 instead of the normal die. (If the blessing has the Basic trait, it may be recharged instead of discarded)'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Balazar (Tyrannomancer)'
+mT.r2_powers.handSize = {6, 8}
+mT.r2_powers.proficiencies = {'Light Armors'}
+mT.r2_powers.A = {'After you play a spell that has the Attack trait, banish it',
+                  'After you play a spell that has the Attack trait, banish it. (After you play a spell that does not have the Attack trait, you may draw a card)'}
+mT.r2_powers.B = {'You may discard a spell to draw a random monster from the box',
+                  'You may discard (or recharge) a spell to draw a random monster from the box'}
+mT.r2_powers.C = {'When you defeat a monster and would banish it, you may add it to your hand instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand (or discard pile) to draw a card',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand (or discard pile) to draw a card (or add 1d4 to any check to defeat a barrier)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand (or discard pile) to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand (or discard pile) to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item) (or reduce damage to a character at your location by 3)',
+                  'When you defeat a monster and would banish it, you may add it to your hand (and you may shuffle a random monster from the box into your deck) instead. You may banish a monster from your hand (or discard pile) to draw a card (or add 1d4 to any check to defeat a barrier) (or to any check to acquire a weapon, an armor or an item) (or reduce damage to a character at your location by 3) (or add 1d6 to any combat check by a character at your location)'}
+mT.r2_powers.D = {'',
+                  'Add 1d8 to any check by a character at your location against a summoned monster',
+                  'Add 1d8 to any check by a character at your location against a summoned monster. (When you defeat a summoned monster, you may draw a random monster from the box)'}
+
+--Character Base Cards
+favouredType = 'Spell'
+cohort = 'Padrig'
+
+mT.cards = {}
+mT.cards.weapon = {0, 0}
+mT.cards.spell = {5, 8}
+mT.cards.armor = {1, 2}
+mT.cards.item = {2, 4}
+mT.cards.ally = {3, 6}
+mT.cards.blessing = {4, 5}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+savedStats.G = 1
+savedStats.H = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

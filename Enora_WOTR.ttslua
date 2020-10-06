@@ -1,0 +1,186 @@
+mT = {}
+
+charType = 'Female Halfling Alchemist'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd6'
+mT.Strength.range = 1
+mT.Strength.Melee = nil
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd6'
+mT.Dexterity.range = 2
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd4'
+mT.Constitution.range = 1
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd12'
+mT.Intelligence.range = 4
+mT.Intelligence.Arcane = 1
+mT.Intelligence.Craft = 1
+mT.Intelligence.Knowledge = 3
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd6'
+mT.Wisdom.range = 3
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd8'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+mT.proficiencies = {}
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Enora'
+mT.r0_powers.handSize = {6, 7}
+
+mT.r0_powers.A = {'When you attempt a check to aquire a spell, you may use your Knowledge skill in place of any listed skill',
+                  'When you attempt a check to aquite a spell (or an item), you may use your Knowledge skill in place of any listed skill'}
+mT.r0_powers.B = {'After you play a spell you may recharge a random spell from your discard pile'}
+mT.r0_powers.C = {'Discard a spell to reduce Cold or Fire damage dealt to you to 0',
+                  'Discard a spell to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you to 0',
+                  'Discard a spell to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you (or to any character at your location) to 0'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Enora (Eldritch Savant)'
+mT.r1_powers.handSize = {6, 9}
+mT.r1_powers.A = {'When you attempt a check to aquire a spell, you may use your Knowledge skill in place of any listed skill',
+                  'When you attempt a check to aquite a spell (or an item), you may use your Knowledge skill in place of any listed skill'}
+mT.r1_powers.B = {'After you play a spell you may recharge a random spell from your discard pile',
+                  'After you play a spell you may recharge a random spell from your discard pile (or shuffle it into your deck)'}
+mT.r1_powers.C = {'Discard a spell to reduce Cold or Fire damage dealt to you to 0',
+                  'Discard a spell to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you to 0',
+                  'Discard a spell to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you (or to any character at your location) to 0'}
+mT.r1_powers.D = {'',
+                  'You may discard a card to examine the top card of your deck; if it is a spell, you may add it to your hand',
+                  'You may discard a card to examine the top card of your deck (and you may recharge the examined card); if it is a spell, you may add it to your hand'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Enora (Occularium Scholar)'
+mT.r2_powers.handSize = {6, 8}
+mT.r2_powers.A = {'When you attempt a check to aquire a spell, you may use your Knowledge skill in place of any listed skill',
+                  'When you attempt a check to aquite a spell (or an item), you may use your Knowledge skill in place of any listed skill',
+                  'When you attempt a check to aquite a spell (or an item) (or you attempt to defeat a barrier), you may use your Knowledge skill in place of any listed skill'}
+mT.r2_powers.B = {'After you play a spell you may recharge a random spell from your discard pile'}
+mT.r2_powers.C = {'Discard a spell to reduce Cold or Fire damage dealt to you to 0',
+                  'Discard a spell (or a boon that has the Book trait) to reduce Cold or Fire damage dealt to you to 0',
+                  'Discard a spell (or a boon that has the Book trait) to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you to 0',
+                  'Discard a spell (or a boon that has the Book trait) to reduce Cold or Fire (or Acid, Electricity or Force) dealt to you (or to any character at your location) to 0'}
+mT.r2_powers.D = {'',
+                  'You may reveal a boon that has the Book trait to add 1d4 to your check',
+                  'You may reveal a boon that has the Book trait to add 1d4 (+1) to your check',
+                  'You may reveal a boon that has the Book trait to add 1d4 (+2) to your check'}
+mT.r2_powers.E = {'',
+                  'At the start of your turn, you may recharge a boon that has the Book trait to examine the top 3 cards of your location deck, or recharge a spell to examine the top 3 cards of your deck',
+                  'At the start of your turn, you may recharge a boon that has the Book trait to examine the top 3 cards of your location deck, or recharge a spell to examine the top 3 cards of your deck. (Put them back in any order)'}
+
+--Character Base Cards
+favouredType = 'Spell'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {0, 0}
+mT.cards.spell = {6, 9}
+mT.cards.armor = {0, 0}
+mT.cards.item = {3, 6}
+mT.cards.ally = {2, 4}
+mT.cards.blessing = {4, 6}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+savedStats.G = 1
+savedStats.H = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

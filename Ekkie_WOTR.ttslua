@@ -1,0 +1,193 @@
+mT = {}
+
+charType = 'Female Goblin Cutpurse'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd8'
+mT.Strength.range = 4
+mT.Strength.Melee = 2
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd10'
+mT.Dexterity.range = 4
+mT.Dexterity.Acrobatics = 2
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = 2
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 2
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd6'
+mT.Intelligence.range = 2
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = nil
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd4'
+mT.Wisdom.range = 0
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd8'
+mT.Charisma.range = 3
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Ekkie'
+mT.r0_powers.handSize = {6, 6}
+mT.r0_powers.proficiencies = {'Weapons', 'Light Armors'}
+mT.r0_powers.A = {'For your check that has or is against a card that has the Animal or Basic trait, add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d6 to your check'}
+mT.r0_powers.B = {'You may evade your encounter; shuffle the evaded card into a random open location, if it came from one'}
+mT.r0_powers.C = {'When you discard 1 or more cards, you may draw a card',
+                  'When you discard (or bury) 1 or more cards, you may draw a card'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Ekkie (Poodlekiller)'
+mT.r1_powers.handSize = {6, 6}
+mT.r1_powers.proficiencies = {'Weapons', 'Light Armors', 'Heavy Armors'}
+mT.r1_powers.A = {'For your check that has or is against a card that has the Animal or Basic trait, add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d6 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d8 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d10 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d10 to your check. (If you acquire a card that has the Animal trait, you may banish it to shuffle 1d4 random cards from your discard pile into your deck)'}
+mT.r1_powers.B = {'You may evade your encounter; shuffle the evaded card into a random open location, if it came from one',
+                  'You may evade your encounter; shuffle the evaded card into (or place it on top of) a random open location, if it came from one'}
+mT.r1_powers.C = {'When you discard 1 or more cards, you may draw a card',
+                  'When you discard (or bury) 1 or more cards, you may draw a card'}
+mT.r1_powers.D = {'',
+                  'You may discard a weapon that has the Slashing trait to allow a character at your location to reroll 1 die on a combat check; that character takes the new result',
+                  'You may discard (or recharge) a weapon that has the Slashing trait to allow a character at your location to reroll 1 die on a combat check; that character takes the new result',
+                  'You may discard (or recharge) a weapon that has the Slashing trait to allow a character at your location to reroll 2 dice on a combat check; that character takes the new result'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Ekkie (Guttersnipe)'
+mT.r2_powers.handSize = {6, 6}
+mT.r2_powers.proficiencies = {'Weapons', 'Light Armors'}
+mT.r2_powers.A = {'For your check that has or is against a card that has the Animal or Basic trait, add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d4 to your check',
+                  'For your check that has or is against a card that has the Animal or Basic trait (or has an adventure deck number less than the current scenario), add 1d6 to your check'}
+mT.r2_powers.B = {'You may evade your encounter; shuffle the evaded card into a random open location, if it came from one',
+                  'You may evade your encounter; shuffle the evaded card into a random open location, if it came from one. (Then you may examine the top card of your location)',
+                  'You may evade your encounter; shuffle the evaded card into a random open location, if it came from one. (Then you may examine the top card of your location) (Then you may move)'}
+mT.r2_powers.C = {'When you discard 1 or more cards, you may draw a card',
+                  'When you discard (or bury) 1 or more cards, you may draw a card',
+                  'When you discard (or bury) 1 or more cards, you may draw a card. (Then you may recharge a card)'}
+mT.r2_powers.D = {'',
+                  'When you attempt a check before you act against a bane, discard a card to use your stealth skill instead of any listed skill',
+                  'When you attempt a check before you act against a bane (or to close a location), discard a card to use your stealth skill instead of any listed skill'}
+mT.r2_powers.E = {'',
+                  'During your give a card step, another character at your location may give you a card'}
+mT.r2_powers.F = {'',
+                  'When a bane or a boon would cause you to draw more than 1 random boon from the box, draw 1 more',
+                  'When a bane or a boon would cause you to draw more than 1 random boon from the box, draw 1 (or 2) more'}
+
+--Character Base Cards
+favouredType = 'Item'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {3, 5}
+mT.cards.spell = {0, 0}
+mT.cards.armor = {1, 3}
+mT.cards.item = {4, 6}
+mT.cards.ally = {3, 5}
+mT.cards.blessing = {4, 6}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+savedStats.G = 1
+savedStats.H = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

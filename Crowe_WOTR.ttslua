@@ -1,0 +1,189 @@
+mT = {}
+
+charType = 'Male Human Bloodrager'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd12'
+mT.Strength.range = 4
+mT.Strength.Melee = 1
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd6'
+mT.Dexterity.range = 1
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 3
+mT.Constitution.Fortitude = 2
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd4'
+mT.Intelligence.range = 1
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = nil
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd6'
+mT.Wisdom.range = 2
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = 3
+
+mT.Charisma = {}
+mT.Charisma.die = 'd8'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Crowe'
+mT.r0_powers.handSize = {5, 6}
+mT.r0_powers.proficiencies = {'Light Armors, Weapons', 'Heavy Armors'}
+mT.r0_powers.A = {'You may bury a card to add 1d10 and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+1) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead'}
+mT.r0_powers.B = {'When you defeat a monster, you may move or put the bottom card of your deck on top of your deck, then end your turn'}
+mT.r0_powers.C = {'',
+                  'You gain the skill Arcane: Charisma +3'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Crowe (Mauler)'
+mT.r1_powers.handSize = {5, 7}
+mT.r1_powers.proficiencies = {'Light Armors, Weapons', 'Heavy Armors'}
+mT.r1_powers.A = {'You may bury a card to add 1d10 and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+1) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+2) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+3) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+3) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check (or the card) has the Attack trait, you may recharge the card instead'}
+mT.r1_powers.B = {'When you defeat a monster, you may move or put the bottom card of your deck on top of your deck, then end your turn'}
+mT.r1_powers.C = {'',
+                  'You gain the skill Arcane: Charisma +3'}
+mT.r1_powers.D = {'',
+                  'On your combat check, you may add 1d8, the Magic trait, and the Electricity or Force trait; if you do, after your check, each character at your location is dealt 2 damage of the chosen type'}
+mT.r1_powers.E = {'',
+                  'Reduce damage dealt to you before you act by 1',
+                  'Reduce damage dealt to you before you act by 2'}
+mT.r1_powers.F = {'',
+                  'When you discard a weapon that has the 2-Handed trait for its power, you may draw a card'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Crowe (Spellrager)'
+mT.r2_powers.handSize = {5, 8}
+mT.r2_powers.proficiencies = {'Light Armors, Weapons', 'Heavy Armors'}
+mT.r2_powers.A = {'You may bury a card to add 1d10 and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+1) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card instead',
+                  'You may bury a card to add 1d10 (+1) and the Electricity or Force trait to your Strength, Melee or Arcane check; if the check has the Attack trait, you may recharge the card (or shuffle it into your deck) instead'}
+mT.r2_powers.B = {'When you defeat a monster, you may move or put the bottom card of your deck on top of your deck, then end your turn',
+                  'When you defeat a monster (or acquire a spell), you may move or put the bottom card of your deck on top of your deck, then end your turn'}
+mT.r2_powers.C = {'',
+                  'You gain the skill Arcane: Charisma +3',
+                  'You gain the skill Arcane: Charisma +3. (Add 1d6 to your check to recharge a spell)'}
+mT.r2_powers.D = {'',
+                  'When you defeat a non-summoned henchmen or villain, you may draw a random spell that has the Arcane and Attack traits from the box',}
+mT.r2_powers.E = {'',
+                  'You may discard a boon that does not have the Attack trait to recharge a card from your discard pile that has the Attack trait',
+                  'You may discard a boon that does not have the Attack trait to recharge a card from your discard pile that has the Attack trait (and draw a card)'}
+
+--Character Base Cards
+favouredType = 'Weapon'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {5, 7}
+mT.cards.spell = {2, 4}
+mT.cards.armor = {2, 3}
+mT.cards.item = {2, 3}
+mT.cards.ally = {0, 2}
+mT.cards.blessing = {4, 6}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+savedStats.G = 1
+savedStats.H = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end
