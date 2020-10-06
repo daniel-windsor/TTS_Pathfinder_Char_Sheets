@@ -1,1 +1,721 @@
-#include Pathfinder_Char_Sheet/Char_Sheet
+boolLoaded = false
+
+char = {}
+mT = {}
+savedStats = {}
+
+characterName = ''
+
+thick = 0.14
+
+--------------------------------------------------------------------------------
+------------------------- Button Creation Functions ----------------------------
+--------------------------------------------------------------------------------
+
+function onLoad()
+	initButtonTable()
+	initButtons()
+
+	for k, v in pairs(buttons) do
+		if k ~= 'index' and k ~= 'values' and k ~= 'params' and k ~= 'targetFunc' then
+			self.setVar(k .. 'upgradeSkill', function() upgradeSkill(k, 1) end)
+			self.setVar(k .. 'upgradeCard', function() upgradeCard(k, 1) end)
+			self.setVar(k .. 'upgradePower', function() upgradePower(k) end)
+			self.setVar(k .. 'upgradeHandSize', function() upgradeHandSize(k) end)
+			self.setVar(k .. 'upgradeProficiency', function() upgradeProficiency(k) end)
+			self.setVar(k .. 'setMarker', function() setMarker(k, 1) end)
+			self.setVar(k .. 'setRoleToggle', function() setRoleToggle(k) end)
+			self.setVar(k .. 'resetChar', function() resetChar(k) end)
+		end
+	end
+
+	generateButtonParams()
+
+	--sets default values for buttons
+	for k, v in pairs(buttons) do
+		if k == 'Strength' or k == 'Dexterity' or k == 'Constitution' or k == 'Intelligence' or k == 'Wisdom' or k == 'Charisma' then
+			buttons.values[tostring(k)] = {
+				die = '-',
+				upgrade = 0,
+				bonus1 = nil,
+				bonus2 = nil,
+				bonus3 = nil
+			}
+		elseif k == 'weapon' or k == 'spell' or k == 'armor' or k == 'item' or k == 'ally' or k == 'blessing' then
+			buttons.values[tostring(k)] = 0
+		elseif k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' then
+			buttons.values[tostring(k)] = {
+				line1 = '',
+				line2 = '',
+				upgrade = '-'
+			}
+		elseif k == 'handSize' then
+			buttons.values.handSize = 0
+		elseif k == 'charName' then
+			buttons.values[tostring(k)] = 'Pathfinder ACG'
+			buttons.values.charType = 'Character Sheet'
+		elseif k == 'toggle' then
+			buttons.values[tostring(k)] = nil
+		elseif k =='proficiencies' then
+			buttons.values[k] = ''
+		elseif  k == 'cohort' or k == 'favouredType' then
+			buttons.values[k] = ''
+		end
+	end
+
+	updateDisplay(true)
+end
+
+function initButtons()
+	dx = 0; dy = -9.5
+	createCounter('charName', 'nameHeader', dx, dy)
+
+	dx = -7.75; dy = -5.25; px = 1.2
+	createCounter('Strength', 'skillAttr', dx, dy); dy = dy + px;
+	createCounter('Dexterity', 'skillAttr', dx, dy); dy = dy + px;
+	createCounter('Constitution', 'skillAttr', dx, dy); dy = dy + px;
+	createCounter('Intelligence', 'skillAttr', dx, dy); dy = dy + px;
+	createCounter('Wisdom', 'skillAttr', dx, dy); dy = dy + px;
+	createCounter('Charisma', 'skillAttr', dx, dy)
+
+	dx = 6; dy = -5.25; px = 1.2
+	createCounter('weapon', 'cardAttr', dx, dy); dy = dy + px;
+	createCounter('spell', 'cardAttr', dx, dy); dy = dy + px;
+	createCounter('armor', 'cardAttr', dx, dy); dy = dy + px;
+	createCounter('item', 'cardAttr', dx, dy); dy = dy + px;
+	createCounter('ally', 'cardAttr', dx, dy); dy = dy + px;
+	createCounter('blessing', 'cardAttr', dx, dy); dy = dy + px;
+
+	dx = 0; dy = 5; px = 1.2
+	createCounter('A', 'powerAttr', dx, dy); dy = dy + px;
+	createCounter('B', 'powerAttr', dx, dy); dy = dy + px;
+	createCounter('C', 'powerAttr', dx, dy); dy = dy + px;
+	createCounter('D', 'powerAttr', dx, dy); dy = dy + px;
+	createCounter('E', 'powerAttr', dx, dy); dy = dy + px;
+	createCounter('F', 'powerAttr', dx, dy)
+
+	dx = 8.75; dy = 2.27; px = 1
+	createCounter('r0_powers', 'roleToggle', dx, dy); dx = dx + px;
+	createCounter('r1_powers', 'roleToggle', dx, dy); dx = dx + px;
+	createCounter('r2_powers', 'roleToggle', dx, dy);
+
+	dx = -8; dy = 3.75
+	createCounter('handSize', 'cardAttr', dx, dy)
+
+	dx = 9.75; dy = 3.75
+	createCounter('proficiencies', 'profAttr', dx, dy)
+
+	dx = 10.5; dy = 0
+	createCounter('cohort', 'miscAttr', dx, dy)
+
+	dx = 10.5; dy = -3.6
+	createCounter('favouredType', 'miscAttr', dx, dy)
+
+	dx = -13.5; dy = -11
+	createCounter('reset', 'resetBtn', dx, dy)
+
+end
+
+function initButtonTable()
+	buttons = {}
+	buttons.index = 0
+	buttons.values = {}
+	buttons.params = {}
+	buttons.params.positions = {}
+	buttons.params.rotation = {}
+	buttons.params.positions.offsets = {}
+	buttons.params.sizes = {}
+	buttons.targetFunc = {}
+
+	buttons.params.sizes.nameHeader = {
+		display = {width = 0, height = 0, font = 800},
+		subtext = {width = 0, height = 0, font = 375},
+		subtextOffsets = {x = 0, y = 0, z = 1.25}
+	}
+	buttons.params.sizes.skillAttr = {
+			display = {width = 0, height = 0, font = 525},
+			upgrade = {width = 475, height = 475, font = 375},
+			bonus = {width = 0, height = 0, font = 200},
+			marker = {width = 0, height = 0, font = 200},
+			upgradeOffsets = {x = 2.25, y = 0, z = 0},
+			markerOffsets = {x = 2.25, y = 0, z = 0.3},
+			bonusOffsets = {x = 5.25, y = 0, z = 0}
+		}
+		buttons.params.sizes.cardAttr = {
+			upgrade = {width = 475, height = 475, font = 375},
+			marker = {width = 0, height = 0, font = 200},
+			markerOffsets = {x = 0, y = 0, z = 0.3}
+		}
+		buttons.params.sizes.powerAttr = {
+			display = {width = 0, height = 0, font = 200},
+			upgrade = {width = 475, height = 475, font = 375},
+			marker = {width = 0, height = 0, font = 200},
+			upgradeOffsets = {x = -13.5, y = 0, z = 0},
+			markerOffsets = {x = -13.5, y = 0, z = 0.3}
+		}
+		buttons.params.sizes.roleToggle = {
+			toggle = {width = 400, height = 400, font = 200},
+		}
+		buttons.params.sizes.profAttr = {
+			display = {width = 3600, height = 475, font = 200},
+			marker = {width = 0, height = 0, font = 200},
+			markerOffsets = {x = 0, y = 0, z = 0.3}
+		}
+		buttons.params.sizes.miscAttr = {
+			display = {width = 0, height = 0, font = 375}
+		}
+		buttons.params.sizes.resetBtn = {
+			display = {width = 600, height = 300, font = 200}
+		}
+end
+
+function generateButtonParams()
+	for k, v in pairs(buttons) do
+		if k == 'charName' then
+			buttons[k].display = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, nil)
+			buttons[k].subtext = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].subtext, '', buttons.params.sizes[buttons[k].type].subtextOffsets, nil)
+		elseif k == 'Strength' or k == 'Dexterity' or k == 'Constitution' or k == 'Intelligence' or k == 'Wisdom' or k == 'Charisma' then
+			buttons[k].display = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, nil)
+			buttons[k].upgrade = setupButton(k .. 'upgradeSkill', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].upgrade, '',  buttons.params.sizes[buttons[k].type].upgradeOffsets, nil)
+			buttons[k].bonus1 = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].bonus, '', buttons.params.sizes[buttons[k].type].bonusOffsets, 'top')
+			buttons[k].bonus2 = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].bonus, '', buttons.params.sizes[buttons[k].type].bonusOffsets, 'bottom')
+			buttons[k].bonus3 = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].bonus, '', buttons.params.sizes[buttons[k].type].bonusOffsets, 'bottomer')
+			buttons[k].marker = setupButton(k .. 'setMarker', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].marker, '',  buttons.params.sizes[buttons[k].type].markerOffsets, nil)
+		elseif k == 'weapon' or k == 'spell' or k == 'armor' or k == 'item' or k == 'ally' or k == 'blessing' or k == 'handSize' then
+			buttons[k].upgrade = setupButton(k .. 'upgradeCard', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].upgrade, '',  nil, nil)
+			buttons[k].marker = setupButton(k .. 'setMarker', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].marker, '',  buttons.params.sizes[buttons[k].type].markerOffsets, nil)
+		elseif k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' then
+			buttons[k].display1 = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, 'top')
+			buttons[k].display2 = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, 'bottom')
+			buttons[k].upgrade = setupButton(k .. 'upgradePower', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].upgrade, '',  buttons.params.sizes[buttons[k].type].upgradeOffsets, nil)
+			buttons[k].marker = setupButton(k .. 'setMarker', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].marker, '',  buttons.params.sizes[buttons[k].type].markerOffsets, nil)
+		elseif k == 'r0_powers' or k == 'r1_powers' or k == 'r2_powers' then
+			buttons[k].toggle = setupButton(k .. 'setRoleToggle', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].toggle, '', nil, nil)
+		elseif k == 'cohort' or k == 'favouredType' then
+			buttons[k].display = setupButton(k .. 'dud', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, nil)
+		elseif k == 'proficiencies' then
+			buttons[k].display = setupButton(k .. 'upgradeProficiency', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, '', nil, nil)
+			buttons[k].marker = setupButton(k .. 'setMarker', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].marker, '',  buttons.params.sizes[buttons[k].type].markerOffsets, nil)
+		elseif k == 'reset' then
+			buttons[k].display = setupButton(k .. 'resetChar', buttons.params.positions[k], buttons.params.sizes[buttons[k].type].display, 'Reset', nil, nil)
+		end
+	end
+end
+
+function createCounter(name, type, px, py)
+	buttons[name] = {type = type}
+	buttons.params.positions[name] = {x = px, y = thick, z = py}
+end
+
+function setupButton(targetFunc, positions, sizes, label, offsets, alignment)
+  local buttonInfo = {}
+  buttonInfo.function_owner = self
+  buttonInfo.index = buttons.index
+  buttonInfo.click_function = targetFunc
+
+	if offsets ~= nil then
+		reverse_x = offsets.x
+	end
+
+	orientationModifier = 0
+  if alignment == 'top' then
+    orientationModifier = -0.25
+	elseif alignment == 'bottom' then
+		orientationModifier = 0.25
+  end
+
+  if offsets == nil then
+    buttonInfo.position = {positions.x, positions.y, positions.z + orientationModifier}
+  else
+    buttonInfo.position = {positions.x + (reverse_x), positions.y + offsets.y, positions.z + offsets.z  + orientationModifier}
+  end
+  buttonInfo.width = sizes.width
+  buttonInfo.height = sizes.height
+  buttonInfo.font_size = sizes.font
+  buttonInfo.label = label
+  buttons.index = buttons.index + 1
+
+  return buttonInfo
+end
+
+--Refreshes display, creates and updates buttons
+function updateDisplay(firstTime)
+	for k, v in pairs(buttons) do
+		if k == 'charName' then
+			buttons[k].display.label = buttons.values[k]
+			buttons[k].subtext.label = buttons.values.charType
+			if firstTime then
+				self.createButton(buttons[k].display)
+				self.createButton(buttons[k].subtext)
+			else
+				self.editButton(buttons[k].display)
+				self.editButton(buttons[k].subtext)
+			end
+		end
+		if k == 'Strength' or k == 'Dexterity' or k == 'Constitution' or k == 'Intelligence' or k == 'Wisdom' or k == 'Charisma' then
+			buttons[k].display.label = buttons.values[k].die
+			buttons[k].upgrade.label = '+'..tostring(buttons.values[k].upgrade)
+			buttons[k].bonus1.label = buttons.values[k].bonus1
+			buttons[k].bonus2.label = buttons.values[k].bonus2
+			buttons[k].bonus3.label = buttons.values[k].bonus3
+			if firstTime then
+				--Creates buttons
+				self.createButton(buttons[k].display)
+				if (buttons[k].upgrade ~= nil) then self.createButton(buttons[k].upgrade) end
+				if (buttons[k].marker ~= nil) then self.createButton(buttons[k].marker) end
+				if (buttons[k].bonus1 ~= nil) then self.createButton(buttons[k].bonus1) end
+				if (buttons[k].bonus2 ~= nil) then self.createButton(buttons[k].bonus2) end
+				if (buttons[k].bonus3 ~= nil) then self.createButton(buttons[k].bonus3) end
+			else
+				self.editButton(buttons[k].display)
+				self.editButton(buttons[k].upgrade)
+				self.editButton(buttons[k].marker)
+				self.editButton(buttons[k].bonus1)
+				self.editButton(buttons[k].bonus2)
+				self.editButton(buttons[k].bonus3)
+			end
+		elseif k == 'weapon' or k == 'spell' or k == 'armor' or k == 'item' or k == 'ally' or k == 'blessing' or k == 'handSize' then
+			buttons[k].upgrade.label = buttons.values[k]
+			if firstTime then
+				self.createButton(buttons[k].upgrade)
+				if (buttons[k].marker ~= nil) then self.createButton(buttons[k].marker) end
+			else
+				self.editButton(buttons[k].upgrade)
+				self.editButton(buttons[k].marker)
+			end
+		elseif k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' then
+			buttons[k].display1.label = buttons.values[k].line1
+			buttons[k].display2.label = buttons.values[k].line2
+			buttons[k].upgrade.label = buttons.values[k].upgrade
+			if firstTime then
+				self.createButton(buttons[k].display1)
+				self.createButton(buttons[k].display2)
+				if (buttons[k].upgrade ~= nil) then self.createButton(buttons[k].upgrade) end
+				if (buttons[k].marker ~= nil) then self.createButton(buttons[k].marker) end
+			else
+				self.editButton(buttons[k].display1)
+				self.editButton(buttons[k].display2)
+				self.editButton(buttons[k].upgrade)
+				self.editButton(buttons[k].marker)
+			end
+		elseif k == 'r0_powers' or k == 'r1_powers' or k == 'r2_powers' then
+			if firstTime then
+				self.createButton(buttons[k].toggle)
+			else
+				self.editButton(buttons[k].toggle)
+			end
+		elseif k == 'cohort' or k == 'favouredType' then
+			buttons[k].display.label = buttons.values[k]
+			if firstTime then
+				self.createButton(buttons[k].display)
+			else
+				self.editButton(buttons[k].display)
+			end
+		elseif k == 'proficiencies' then
+			buttons[k].display.label = buttons.values[k]
+			if firstTime then
+				self.createButton(buttons[k].display)
+				if (buttons[k].marker ~= nil) then self.createButton(buttons[k].marker) end
+			else
+				self.editButton(buttons[k].display)
+				self.editButton(buttons[k].marker)
+			end
+		elseif k == 'reset' then
+			if firstTime then
+				self.createButton(buttons[k].display)
+			end
+		end
+	end
+end
+
+--------------------------------------------------------------------------------
+-------------------------- Character Load Functions ----------------------------
+--------------------------------------------------------------------------------
+
+--Called when character token is placed on sheet
+function onCollisionEnter(obj)
+	local tempObj = obj.collision_object
+	if tempObj.getDescription() == 'Char' and boolLoaded == false then
+		char = obj.collision_object
+
+		local pos = char.getPosition()
+		local params = {}
+		params.position = {pos[1]+2.5, pos[2], pos[3]}
+		clone = char.clone(params)
+		clone.setDescription('')
+
+		savedStats = char.call('getStats')
+
+		loadCharacter()
+		updateDisplay(false)
+	end
+end
+
+--Called when character token is removed from sheet
+function onCollisionExit(obj)
+	if char == obj.collision_object then
+		clone.destruct()
+		boolLoaded = false
+		reset()
+		updateDisplay(false)
+	end
+end
+
+--Loads data from character token
+function loadCharacter()
+	boolLoaded = true
+
+	mT = char.call('getData')
+
+	--Loads Skills
+	for k, v in pairs(mT) do
+		if k == 'Strength' or k == 'Dexterity' or k == 'Constitution' or k == 'Intelligence' or k == 'Wisdom' or k == 'Charisma' then
+			if savedStats[k] > 0 then
+				buttons.values[k].upgrade = savedStats[k]
+			end
+			local index = 0
+			for l, w in pairs(mT[k]) do
+				if l ~= 'die' and l ~= 'range' and l ~= 'upgrade' then
+					if index == 0 then
+						buttons.values[k].bonus1 = tostring(l..': '..k..' +'..w)
+						index = 1
+					elseif index == 1 then
+						buttons.values[k].bonus2 = tostring(l..': '..k..' +'..w)
+						index = 2
+					elseif index == 2 then
+						buttons.values[k].bonus3 = tostring(l..': '..k..' +'..w)
+					end
+				end
+			end
+			buttons.values[k].die = mT[k].die
+			setMarker(k, mT[k].range - savedStats[k])
+		end
+	end
+
+	--Loads Cards
+	for k, v in pairs(mT.cards) do
+		if savedStats[k] > 0 then
+			buttons.values[k] = savedStats[k]
+			setMarker(k, v[2] - savedStats[k])
+		else
+			buttons.values[k] = v[1]
+			setMarker(k, v[2]-v[1])
+		end
+	end
+
+	--Load Role/Powers
+	loadPowers()
+	setRoleToggle(savedStats.role)
+
+	--Load Hand size
+	local role = savedStats.role
+	if savedStats.handSize > 0 then
+		buttons.values.handSize = mT[role].handSize[1] + savedStats.handSize
+		setMarker('handSize', mT[role].handSize[2] - mT[role].handSize[1] - savedStats.handSize)
+	else
+		buttons.values.handSize = mT[role].handSize[1]
+		setMarker('handSize', mT[role].handSize[2] - mT[role].handSize[1])
+	end
+
+	--Load cohort
+	local cohort = char.call('getCohort')
+	if cohort ~= nil then
+		buttons.values.cohort = cohort
+	end
+
+	--Load favoured
+	buttons.values.favouredType = char.call('getFavouredType')
+
+	--Loads charType
+	buttons.values.charType = char.call('getType')
+
+	local player = char.call('getPlayer')
+	local color = stringColorToRGB(player)
+	printToColor('Loaded: ' .. buttons.values.charName, player, color)
+end
+
+function loadPowers()
+	local role = savedStats.role
+
+	for k, v in pairs(mT[role]) do
+		if k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' then
+			if savedStats[k] > #mT[role][k] then
+				savedStats[k] = #mT[role][k]
+			end
+
+			if mT[role][k][1] == '' then
+				buttons.values[k].upgrade = savedStats[k] - 1
+			else
+				buttons.values[k].upgrade = savedStats[k]
+			end
+
+			local strings = {prepString(tostring(mT[role][k][savedStats[k]]))}
+			buttons.values[k].line1 = strings[1]
+			buttons.values[k].line2 = strings[2]
+
+			setMarker(k, #mT[role][k] - savedStats[k])
+		end
+	end
+
+	--Correct hand size
+	if buttons.values.handSize > mT[role].handSize[2] then
+		buttons.values.handSize = mT[role].handSize[2]
+	end
+	setMarker('handSize', mT[role].handSize[2] - buttons.values.handSize)
+
+	--Load proficiencies
+	if mT[role].proficiencies ~= nil then
+		local prof = mT[role].proficiencies[1]
+
+		for i = 2, savedStats.proficiencies do
+			if mT[role].proficiencies[i] ~= nil then
+				prof = prof .. ', ' .. mT[role].proficiencies[i]
+			end
+		end
+
+		setMarker('proficiencies', #mT[role].proficiencies - savedStats.proficiencies)
+
+		buttons.values.proficiencies = prof
+	end
+end
+
+--------------------------------------------------------------------------------
+----------------------------- Button Functions ---------------------------------
+--------------------------------------------------------------------------------
+
+--Blank method for display buttons
+function dud()
+
+end
+
+--Upgrades skill feats
+function upgradeSkill(location, num)
+	if boolLoaded then
+		if buttons.values[location].upgrade < mT[location].range then
+			buttons.values[location].upgrade = buttons.values[location].upgrade + num
+
+			setMarker(location, mT[location].range - buttons.values[location].upgrade)
+
+		elseif buttons.values[location].upgrade == mT[location].range then
+			buttons.values[location].upgrade = 0
+
+			setMarker(location, mT[location].range)
+		end
+
+		local params = {location, buttons.values[location].upgrade}
+		char.call('setStats', params)
+		updateDisplay(false)
+	end
+end
+
+--Upgrades card feats
+function upgradeCard(location, num)
+	if boolLoaded and location ~= 'handSize' then
+		if buttons.values[location] < mT.cards[location][2] then
+			buttons.values[location] = buttons.values[location] + 1
+
+			setMarker(location, mT.cards[location][2] - buttons.values[location])
+
+		elseif buttons.values[location] == mT.cards[location][2] then
+			buttons.values[location] = mT.cards[location][1]
+
+			setMarker(location, mT.cards[location][2] - mT.cards[location][1])
+		end
+
+		local params = {location, buttons.values[location]}
+		char.call('setStats', params)
+		updateDisplay(false)
+
+	elseif boolLoaded and location == 'handSize' then
+		local role = savedStats.role
+
+		if buttons.values[location] < mT[role].handSize[2] then
+			buttons.values[location] = buttons.values[location] + 1
+
+			setMarker(location, mT[role].handSize[2] - buttons.values[location])
+		elseif buttons.values[location] == mT[role].handSize[2] then
+			buttons.values[location] = mT[role].handSize[1]
+
+			setMarker(location, mT[role].handSize[2] - mT[role].handSize[1])
+		end
+
+		savedStats[location] = buttons.values[location] - mT[role].handSize[1]
+
+		local params = {location, savedStats[location]}
+		char.call('setStats', params)
+		updateDisplay(false)
+	end
+end
+
+--Upgrade power feats
+function upgradePower(location)
+	local role = savedStats.role
+
+	if boolLoaded and mT[role][location] ~= nil then
+		local index = savedStats[location]
+
+		if index < #mT[role][location] then
+			index = index + 1
+		else
+			index = 1
+		end
+
+		savedStats[location] = index
+		loadPowers()
+		updateDisplay(false)
+
+		local params = {location, index}
+		char.call('setStats', params)
+	end
+end
+
+function upgradeProficiency(location)
+	local role = savedStats.role
+	if boolLoaded and location == 'proficiencies' and mT[role].proficiencies ~= nil then
+		if #mT[role].proficiencies > savedStats.proficiencies then
+			savedStats.proficiencies = savedStats.proficiencies + 1
+			local prof = mT[role].proficiencies[1]
+
+			for i = 2, savedStats.proficiencies do
+				prof = prof .. ', ' .. mT[role].proficiencies[i]
+			end
+
+			buttons.values.proficiencies = prof
+		else
+			savedStats.proficiencies = 1
+			buttons.values.proficiencies = mT[role].proficiencies[savedStats.proficiencies]
+		end
+
+		setMarker('proficiencies', #mT[role].proficiencies - savedStats.proficiencies)
+		updateDisplay(false)
+
+		local params = {location, savedStats.proficiencies}
+		char.call('setStats', params)
+	end
+end
+
+--------------------------------------------------------------------------------
+----------------------------- Utility Functions ---------------------------------
+--------------------------------------------------------------------------------
+
+--Sets toggle for character role
+function setRoleToggle(location)
+	if boolLoaded then
+		buttons.r0_powers.toggle.color = {1, 1, 1}
+		buttons.r1_powers.toggle.color = {1, 1, 1}
+		buttons.r2_powers.toggle.color = {1, 1, 1}
+
+		buttons[location].toggle.color = {0, 0, 0}
+		buttons.values.role = location
+
+		--Reset and load new powers
+		local letters = {'A', 'B', 'C', 'D', 'E', 'F'}
+		for i = 1, #letters do
+			buttons.values[letters[i]].line1 = ''
+			buttons.values[letters[i]].line2 = ''
+			buttons.values[letters[i]].upgrade = '-'
+			buttons[letters[i]].marker.label = ''
+		end
+
+		savedStats.role = location
+
+		loadPowers()
+
+		buttons.values.charName = mT[location].name
+
+		local params = {location}
+		char.call('setRole', params)
+		updateDisplay(false)
+	end
+end
+
+--Handles upgrade marker for each stat button
+function setMarker(location, num)
+	local var = ''
+	for i = 1, num do
+		var = var .. '.'
+	end
+	buttons[location].marker.label = var
+	updateDisplay(false)
+end
+
+--Splits powers into two lines
+function prepString(string)
+	local words = {}
+	for s in string:gmatch("%S+") do
+		table.insert(words, s)
+	end
+
+	local length = 0
+	if #words < 20 then
+		length = #words
+	else
+		length = #words/2
+	end
+
+	local lineOne = ''
+	local lineTwo = ''
+
+	for i = 1, #words do
+		if i < length or i == length then
+			lineOne = lineOne..' '..words[i]
+		elseif i > length then
+			lineTwo = lineTwo..' '..words[i]
+		end
+	end
+	return lineOne, lineTwo
+end
+
+--Resets sheet to default values
+function reset()
+	buttons.values['charName'] = 'Pathfinder ACG'
+	buttons.values['charType'] = 'Character Sheet'
+	for k, v in pairs(buttons) do
+		if k == 'Strength' or k == 'Dexterity' or k == 'Constitution' or k == 'Intelligence' or k == 'Wisdom' or k == 'Charisma' then
+			buttons.values[k].upgrade = 0
+			buttons.values[k].die = '-'
+			buttons.values[k].bonus1 = nil
+			buttons.values[k].bonus2 = nil
+			buttons.values[k].bonus3 = nil
+			buttons[k].marker.label = ''
+		elseif k == 'weapon' or k == 'spell' or k == 'armor' or k == 'item' or k == 'ally' or k == 'blessing' or k == 'handSize' then
+			buttons.values[k] = 0
+			buttons[k].marker.label = ''
+		elseif k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' then
+			buttons.values[k].line1 = ''
+			buttons.values[k].line2 = ''
+			buttons.values[k].upgrade = '-'
+			buttons[k].marker.label = ''
+		end
+		buttons.r0_powers.toggle.color = {1, 1, 1}
+		buttons.r1_powers.toggle.color = {1, 1, 1}
+		buttons.r2_powers.toggle.color = {1, 1, 1}
+		buttons.values.role = ''
+		buttons.values.proficiencies = ''
+		buttons.values.cohort = ''
+		buttons.values.favouredType = ''
+	end
+end
+
+--Reset char save
+function resetChar()
+	for k, v in pairs(savedStats) do
+		if k == 'A' or k == 'B' or k == 'C' or k == 'D' or k == 'E' or k == 'F' or k == 'proficiencies' then
+			savedStats[k] = 1
+			--buttons.values[k] = 1
+			local params = {k, savedStats[k]}
+			char.call('setStats', params)
+		elseif k == 'role' then
+			savedStats[k] = 'r0_powers'
+			local params = {savedStats[k]}
+			char.call('setRole', params)
+		else
+			savedStats[k] = 0
+			local params = {k, savedStats[k]}
+			char.call('setStats', params)
+		end
+	end
+	reset()
+	loadCharacter()
+	updateDisplay(false)
+end
