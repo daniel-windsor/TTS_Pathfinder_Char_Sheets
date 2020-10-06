@@ -1,0 +1,188 @@
+mT = {}
+
+charType = 'Male Dwarf Ranger'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd6'
+mT.Strength.range = 2
+mT.Strength.Melee = nil
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd8'
+mT.Dexterity.range = 4
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = 2
+
+mT.Constitution = {}
+mT.Constitution.die = 'd10'
+mT.Constitution.range = 3
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd6'
+mT.Intelligence.range = 2
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = nil
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd8'
+mT.Wisdom.range = 3
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = 1
+mT.Wisdom.Survival = 2
+
+mT.Charisma = {}
+mT.Charisma.die = 'd4'
+mT.Charisma.range = 1
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Harsk'
+mT.r0_powers.handSize = {5, 7}
+mT.r0_powers.proficiencies = {'Light Armors, Weapons'}
+mT.r0_powers.A = {'You may evade a bane you encounter that has the Animal or Vermin trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait; otherwise, add 2d4 to your checks against it'}
+mT.r0_powers.B = {'When you would bury or discard a weapon that has the Ranged trait for its power, you may recharge it instead'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Harsk (Demonslayer)'
+mT.r1_powers.handSize = {5, 8}
+mT.r1_powers.proficiencies = {'Light Armors, Weapons'}
+mT.r1_powers.A = {'You may evade a bane you encounter that has the Animal or Vermin trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait (and you may put it on top of its location deck); otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait (and you may put it on top of its location deck); otherwise, add 2d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait (and you may put it on top of its location deck); otherwise, add 2d6 to your checks against it'}
+mT.r1_powers.B = {'When you would bury or discard a weapon that has the Ranged trait for its power, you may recharge it instead'}
+mT.r1_powers.C = {'',
+                  'When you attempt a Knowledge check against a monster, you may use your Survival skill instead of your Knowledge skill'}
+mT.r1_powers.D = {'',
+                  'If you would fail a check against a bane that has the Demon trait, you may reroll 1 die; take the new result'}
+mT.r1_powers.E = {'',
+                  'On the first exploration of your turn, if you defeat a bane that has the Demon trait, you may explore again'}
+mT.r1_powers.F = {'',
+                  'You may exchange a card to add 1d4 to another character\'s check to defeat a bane that has the Demon trait',
+                  'You may exchange a card to add 1d4 (+1) to another character\'s check to defeat a bane that has the Demon trait'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Kyra (Abyssal Walker)'
+mT.r2_powers.handSize = {5, 7}
+mT.r2_powers.proficiencies = {'Light Armors, Weapons'}
+mT.r2_powers.A = {'You may evade a bane you encounter that has the Animal or Vermin trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait; otherwise, add 1d4 to your checks against it',
+                  'You may evade a bane you encounter that has the Animal or Vermin (or Demon) trait; otherwise, add 2d4 to your checks against it',}
+mT.r2_powers.B = {'When you would bury or discard a weapon that has the Ranged trait for its power, you may recharge it instead'}
+mT.r2_powers.C = {'',
+                  'At the start of your turn, you may examine the top card of your location deck',
+                  'At the start (or end) of your turn, you may examine the top card of your location deck',
+                  'At the start (or end) of your turn, you may examine the top card (or two cards) of your location deck',
+                  'At the start (or end) of your turn, you may examine the top card (or two cards) of your location deck (and you may move to a location that has the abyssal trait)'}
+mT.r2_powers.D = {'',
+                  'When you close a location that has the Abyssal trait, you may acquire a boon from your location deck',
+                  'When you close (or a character at your location closes) a location that has the Abyssal trait, you may acquire a boon from your location deck'}
+mT.r2_powers.E = {'',
+                  'On your turn, if you are at a location that has the Abyssal trait, you may discard the top card of your deck to ignore your location\'s At This Location power until the end of the turn',
+                  'On your turn, if you are at a location that has the Abyssal trait, you may discard the top card of your deck (or a card from your hand) to ignore your location\'s At This Location power until the end of the turn'}
+
+--Character Base Cards
+favouredType = 'Weapon'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {5, 8}
+mT.cards.spell = {0, 1}
+mT.cards.armor = {2, 3}
+mT.cards.item = {2, 3}
+mT.cards.ally = {2, 4}
+mT.cards.blessing = {4, 6}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

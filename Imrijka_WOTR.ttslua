@@ -1,0 +1,192 @@
+mT = {}
+
+charType = 'Female Half-Orc Inquisitor'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd10'
+mT.Strength.range = 4
+mT.Strength.Melee = 1
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd8'
+mT.Dexterity.range = 3
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 2
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd4'
+mT.Intelligence.range = 1
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = nil
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd8'
+mT.Wisdom.range = 4
+mT.Wisdom.Divine = 1
+mT.Wisdom.Knowledge = 2
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd6'
+mT.Charisma.range = 1
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Imrijka'
+mT.r0_powers.handSize = {5, 6}
+mT.r0_powers.proficiencies = {'Weapons', 'Light Armors'}
+mT.r0_powers.A = {'',
+                  'You gain the skill Perception: Wisdom +2'}
+mT.r0_powers.B = {'You may recharge a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster',
+                  'You may recharge (or reveal) a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster'}
+mT.r0_powers.C = {'When you defeat a monster on your turn, you may roll d6; on a 4, 5 or 6, explore your location',
+                  'When you defeat a monster on your turn, you may roll d6; on a (3) 4, 5 or 6, explore your location'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Imrijka (Wandering Judge)'
+mT.r1_powers.handSize = {5, 7}
+mT.r1_powers.proficiencies = {'Weapons', 'Light Armors'}
+mT.r1_powers.A = {'',
+                  'You gain the skill Perception: Wisdom +2'}
+mT.r1_powers.B = {'You may recharge a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster',
+                  'You may recharge (or reveal) a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster'}
+mT.r1_powers.C = {'When you defeat a monster on your turn, you may roll d6; on a 4, 5 or 6, explore your location',
+                  'When you defeat a monster on your turn, you may roll d6; on a (3) 4, 5 or 6, explore your location',
+                  'When you defeat a monster on your turn, you may roll d6; on a (3) 4, 5 or 6, explore your location (and before you explore, you may draw a card)',
+                  'When you defeat a monster on your turn, you may roll d6; on a (3) 4, 5 or 6, explore your location (and before you explore, you may draw a card). (Add 1d4 to your checks during this exploration)'}
+mT.r1_powers.D = {'',
+                  'Recharge a card that has the Ranged or Divine trait to add 1d4 to a combat check at another location',
+                  'Recharge a card that has the Ranged or Divine trait to add 1d4 (+1) to a combat check at another location',
+                  'Recharge a card that has the Ranged or Divine trait to add 1d4 (+2) to a combat check at another location'}
+mT.r1_powers.E = {'',
+                  'When you play a non-Basic blessing  that matches the top card of the blessings discard pile, you may shuffle the top card of the blessings discard pile into the blessings deck'}
+mT.r1_powers.F = {'',
+                  'Add 2 to your check to acquire an ally or blessing'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Imrijka (Cold Iron Warden)'
+mT.r2_powers.handSize = {5, 7}
+mT.r2_powers.proficiencies = {'Weapons', 'Light Armors'}
+mT.r2_powers.A = {'',
+                  'You gain the skill Perception: Wisdom +2'}
+mT.r2_powers.B = {'You may recharge a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster',
+                  'You may recharge (or reveal) a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster',
+                  'You may recharge (or reveal) a card that has the Divine or Ranged trait to add 1d4 and the Divine and Magic traits to your check against a monster. (If that monster has the Cultist trait, add another 1d8)'}
+mT.r2_powers.C = {'When you defeat a monster on your turn, you may roll d6; on a 4, 5 or 6, explore your location',
+                  'When you defeat a monster on your turn, (you may examine the top card of your location deck, and if it is not a monster, put it on the bottom of the location deck, then) you may roll d6; on a 4, 5 or 6, explore your location',
+                  'When you defeat a monster on your turn, (you may examine the top card of your location deck, and if it is not a monster, put it on the bottom of the location deck, then) you may roll d6; on a (3) 4, 5 or 6, explore your location'}
+mT.r2_powers.D = {'',
+                  'When you attempt a Displomacy check, you may use your Strength skill instead of your Diplomacy skill'}
+mT.r2_powers.E = {'',
+                  'When you play a blessing that has the Basic trait on any check to defeat a bane, you may recharge it instead of discarding it',
+                  'When you play a blessing that has the Basic trait on any check to defeat a bane, you may recharge it (or put it on top of your deck) instead of discarding it'}
+mT.r2_powers.F = {'',
+                  'You may evade a barrier you encounter',
+                  'You may evade a barrier you encounter (and you may put it at the bottom of its location deck)'}
+
+--Character Base Cards
+favouredType = 'Weapon or Blessing'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {5, 7}
+mT.cards.spell = {1, 3}
+mT.cards.armor = {1, 2}
+mT.cards.item = {2, 3}
+mT.cards.ally = {1, 2}
+mT.cards.blessing = {5, 8}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

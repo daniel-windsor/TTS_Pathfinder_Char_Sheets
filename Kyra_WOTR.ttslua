@@ -1,0 +1,185 @@
+mT = {}
+
+charType = 'Female Human Cleric'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd6'
+mT.Strength.range = 1
+mT.Strength.Melee = nil
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd4'
+mT.Dexterity.range = 1
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 3
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd8'
+mT.Intelligence.range = 2
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = 2
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd12'
+mT.Wisdom.range = 4
+mT.Wisdom.Divine = 2
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = nil
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd6'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = nil
+mT.Charisma.Diplomacy = 2
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Kyra'
+mT.r0_powers.handSize = {5, 6}
+mT.r0_powers.proficiencies = {'Light Armors, Heavy Armors', 'Weapons'}
+mT.r0_powers.A = {'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell (or blessing) to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits'}
+mT.r0_powers.B = {'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check',
+                  'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s (or your) check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Kyra (Dawnflower\'s Flare)'
+mT.r1_powers.handSize = {5, 6}
+mT.r1_powers.proficiencies = {'Light Armors, Heavy Armors', 'Weapons'}
+mT.r1_powers.A = {'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge (or shuffle in to your deck) a spell to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge (or shuffle in to your deck) a spell (or blessing) to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge (or shuffle in to your deck) a spell (or blessing) to use your Divine skill + 2d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge (or shuffle in to your deck) a spell (or blessing) to use your Divine skill + 2d8 and add the Attack, Divine and Magic traits. (You may add an additional 1d8 and the Fire trait)'}
+mT.r1_powers.B = {'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check',
+                  'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s (or your) check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check'}
+mT.r1_powers.C = {'',
+                  'When you play a blessing on your check to defeat a bane that has the Demon or Undead trait, you may recharge that blessing'}
+mT.r1_powers.D = {'',
+                  'Add 1d4 to your check to recharge a card that has the Attack trait',
+                  'Add 1d4 (+2) to your check to recharge a card that has the Attack trait'}
+mT.r1_powers.E = {'',
+                  'When another character plays a Blessing of Sarenrae on your check, that character may recharge it',
+                  'When another character plays a Blessing of Sarenrae on your check, that character may recharge it (and another card from her discard pile)'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Kyra (Everlight\'s Grace)'
+mT.r2_powers.handSize = {5, 7}
+mT.r2_powers.proficiencies = {'Light Armors, Heavy Armors', 'Weapons'}
+mT.r2_powers.A = {'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell (or blessing) to use your Divine skill + 1d8 and add the Attack, Divine and Magic traits',
+                  'For your check to defeat a bane that has the Demon or Undead trait, you may recharge a spell (or blessing) to use your Divine skill + 2d6 and add the Attack, Divine and Magic traits'}
+mT.r2_powers.B = {'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check',
+                  'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s (or your) check to defeat, a character at your location may shuffle 1 random card from his discard pile into his deck after the check',
+                  'When you use the above power to play a blessing that does not have the Corrupted trait on another Character\'s (or your) check to defeat, a character at your location may shuffle 1 random card (of a type of your choice) from his discard pile into his deck after the check'}
+mT.r2_powers.C = {'',
+                  'When you play a boon that has the Healing trait on a character, any armors that would be shuffled into that character\'s deck may be put into that character\'s hand instead',
+                  'When you play a boon that has the Healing trait on a character, any armors that would be shuffled into that character\'s deck may be put into that character\'s hand instead. (Then you may recharge your boon)'}
+mT.r2_powers.D = {'',
+                  'When you would bury an armor for its power, that character may discard it instead',
+                  'When you (or a character at your location) would bury an armor for its power, that character may discard it instead'}
+
+--Character Base Cards
+favouredType = 'Spell'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {1, 2}
+mT.cards.spell = {5, 7}
+mT.cards.armor = {1, 2}
+mT.cards.item = {1, 2}
+mT.cards.ally = {2, 4}
+mT.cards.blessing = {5, 8}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end

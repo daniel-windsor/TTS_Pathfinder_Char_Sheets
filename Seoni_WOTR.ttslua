@@ -1,0 +1,191 @@
+mT = {}
+
+charType = 'Female Human Sorceror'
+
+--Character Base Skills
+mT.Strength = {}
+mT.Strength.die = 'd6'
+mT.Strength.range = 1
+mT.Strength.Melee = nil
+
+mT.Dexterity = {}
+mT.Dexterity.die = 'd4'
+mT.Dexterity.range = 2
+mT.Dexterity.Acrobatics = nil
+mT.Dexterity.Disable = nil
+mT.Dexterity.Ranged = nil
+mT.Dexterity.Stealth = nil
+
+mT.Constitution = {}
+mT.Constitution.die = 'd6'
+mT.Constitution.range = 2
+mT.Constitution.Fortitude = nil
+
+mT.Intelligence = {}
+mT.Intelligence.die = 'd8'
+mT.Intelligence.range = 4
+mT.Intelligence.Arcane = nil
+mT.Intelligence.Craft = nil
+mT.Intelligence.Knowledge = 2
+
+mT.Wisdom = {}
+mT.Wisdom.die = 'd6'
+mT.Wisdom.range = 2
+mT.Wisdom.Divine = nil
+mT.Wisdom.Knowledge = nil
+mT.Wisdom.Perception = 2
+mT.Wisdom.Survival = nil
+
+mT.Charisma = {}
+mT.Charisma.die = 'd12'
+mT.Charisma.range = 4
+mT.Charisma.Arcane = 2
+mT.Charisma.Diplomacy = nil
+mT.Charisma.Knowledge = nil;
+
+--Character Base Powers
+powerRole = 'r0_powers'
+
+mT.r0_powers = {}
+mT.r0_powers.name = 'Seoni'
+mT.r0_powers.handSize = {6, 7}
+mT.r0_powers.proficiencies = {''}
+mT.r0_powers.A = {'Before your combat check, you may discard a card to draw a card that has the Arcane trait from your discard pile',
+                  'Before your combat check, you may discard a card to draw a card that has the Arcane (or Magic) trait from your discard pile'}
+mT.r0_powers.B = {'You may automatically succeed at your check to recharge a spell that has the Attack trait',
+                  'You may automatically succeed at your check to recharge a spell (or an item) that has the Attack trait'}
+mT.r0_powers.C = {'When you acquire an ally, you may draw a card',
+                  'When you acquire an ally (or a spell), you may draw a card'}
+
+mT.r1_powers = {}
+mT.r1_powers.name = 'Seoni (Element Master)'
+mT.r1_powers.handSize = {5, 8}
+mT.r1_powers.proficiencies = {''}
+mT.r1_powers.A = {'For your power feat, you may check any 1 of the traits below. That trait applies in any power that uses the word "mastered":',
+                  'For your power feat, you may check any 1 of the traits below. That trait applies in any power that uses the word "mastered": Acid',
+                  'For your power feat, you may check any 1 of the traits below. That trait applies in any power that uses the word "mastered": Cold',
+                  'For your power feat, you may check any 1 of the traits below. That trait applies in any power that uses the word "mastered": Electricity',
+                  'For your power feat, you may check any 1 of the traits below. That trait applies in any power that uses the word "mastered": Fire'}
+mT.r1_powers.B = {'',
+                  'You may add one mastered trait to your check'}
+mT.r1_powers.C = {'Before your combat check, you may discard a card to draw a card that has the Arcane or mastered trait from your discard pile',
+                  'Before your combat check, you may discard a card to draw a card that has the Arcane (or Magic) or mastered trait from your discard pile'}
+mT.r1_powers.D = {'You may automatically succeed at your check to recharge a spell that has the Attack or mastered trait',
+                  'You may automatically succeed at your check to recharge a spell (or an item) that has the Attack or mastered trait'}
+mT.r1_powers.E = {'When you acquire a card that has the mastered trait or an ally, you may draw a card',
+                  'When you acquire a card that has the mastered trait or an ally (or a spell), you may draw a card'}
+mT.r1_powers.F = {'Reduce damage of a mastered type dealt to you by 2',
+                  'Reduce damage of a mastered type dealt to you by 2. Add 4 to your check that has a mastered trait',
+                  'Reduce damage of a mastered type dealt to you by 4. Add 4 to your check that has a mastered trait'}
+
+mT.r2_powers = {}
+mT.r2_powers.name = 'Seoni (Corruptor)'
+mT.r2_powers.handSize = {6, 7}
+mT.r2_powers.proficiencies = {'', 'Light Armors'}
+mT.r2_powers.A = {'Before your combat check, you may discard a card to draw a card that has the Arcane trait from your discard pile',
+                  'Before your combat check, you may discard a card to draw a card that has the Arcane (or Magic) trait from your discard pile',
+                  'Before your combat check, you may discard a card to draw a card that has the Arcane (or Magic) (or Corrupted) trait from your discard pile'}
+mT.r2_powers.B = {'You may automatically succeed at your check to recharge a spell that has the Attack trait',
+                  'You may automatically succeed at your check to recharge a spell (or an item) that has the Attack trait'}
+mT.r2_powers.C = {'When you acquire an ally, you may draw a card',
+                  'When you acquire an ally (or a spell), you may draw a card',
+                  'When you acquire an ally (or a spell)(or a card that has the Corrupted trait), you may draw a card'}
+mT.r2_powers.D = {'',
+                  'You may treat a card in your hand that has the Corrupted trait as if it has the same powers as the top card in the blessings discard pile. This counts as playing a blessing',
+                  'You may treat a card in your hand that has the Corrupted trait as if it has the same powers as the top (or any) card in the blessings discard pile. This counts as playing a blessing',}
+mT.r2_powers.E = {'',
+                  'After the first exploration of your turn, you may examine the top card of your location deck',
+                  'After the first exploration of your turn, you may examine the top card (and bottom card) of your location deck',
+                  'After the first exploration of your turn, you may examine the top card (and bottom card) of your location deck. (You may encounter one such card that has the Arcane or Corrupted trait)'}
+
+--Character Base Cards
+favouredType = 'Spell'
+cohort = ''
+
+mT.cards = {}
+mT.cards.weapon = {0, 1}
+mT.cards.spell = {5, 7}
+mT.cards.armor = {1, 2}
+mT.cards.item = {2, 4}
+mT.cards.ally = {3, 5}
+mT.cards.blessing = {4, 6}
+
+--Character upgraded skills
+savedStats = {}
+
+savedStats.Strength = 0
+savedStats.Dexterity = 0
+savedStats.Constitution = 0
+savedStats.Intelligence = 0
+savedStats.Wisdom = 0
+savedStats.Charisma = 0
+
+savedStats.proficiencies = 1
+savedStats.weapon = 0
+savedStats.spell = 0
+savedStats.armor = 0
+savedStats.item = 0
+savedStats.ally = 0
+savedStats.blessing = 0
+
+savedStats.role = 'r0_powers'
+savedStats.handSize = 0
+
+savedStats.A = 1
+savedStats.B = 1
+savedStats.C = 1
+savedStats.D = 1
+savedStats.E = 1
+savedStats.F = 1
+
+player = ''
+
+function onLoad(save_state)
+  if save_state ~= '' then
+    savedStats = JSON.decode(save_state)
+  end
+end
+
+function onSave()
+		saved_data = JSON.encode(savedStats)
+
+	--Uncomment this line to reset the save data:
+	--saved_data = ''
+	return saved_data
+end
+
+function onDropped(player_color)
+  player = player_color
+end
+
+function getPlayer()
+  return player
+end
+
+function getData()
+  return mT
+end
+
+function getStats()
+  return savedStats
+end
+
+function getType()
+  return charType
+end
+
+function getCohort()
+  return cohort
+end
+
+function getFavouredType()
+  return favouredType
+end
+
+function setStats(params)
+  savedStats[params[1]] = params[2]
+end
+
+function setRole(params)
+  savedStats.role = params[1]
+end
